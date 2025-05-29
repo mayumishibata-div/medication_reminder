@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-gray-100 font-sans antialiased">
-  <header class="bg-orange-700 text-white shadow-md">
+  <header class="bg-orange-400 text-white shadow-md">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center">
         <%= link_to root_path, class: "flex items-center space-x-2 text-white hover:text-orange-100 transition duration-200" do %>
@@ -24,8 +24,8 @@
       <nav>
         <ul class="flex items-center space-x-4 md:space-x-6">
           <% if user_signed_in? %>
-            <li><%= link_to 'マイ薬一覧', medications_path, class: "text-white hover:text-orange-100 px-3 py-2 rounded-md transition duration-200" %></li>
-            <li><%= link_to '服用記録', doses_path, class: "text-white hover:text-orange-100 px-3 py-2 rounded-md transition duration-200" %></li>
+            <%# <li><%= link_to 'マイ薬一覧', medications_path, class: "text-white hover:text-orange-100 px-3 py-2 rounded-md transition duration-200" %></li> %>
+            <%# <li><%= link_to '服用記録', doses_path, class: "text-white hover:text-orange-100 px-3 py-2 rounded-md transition duration-200" %></li> %>
             <li><%= link_to '設定', edit_user_registration_path, class: "text-white hover:text-orange-100 px-3 py-2 rounded-md transition duration-200" %></li>
             <li><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: '本当にログアウトしますか？' }, class: "bg-orange-600 hover:bg-orange-800 text-white font-semibold px-4 py-2 rounded-md transition duration-200" %></li>
           <% else %>
