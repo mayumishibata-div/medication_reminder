@@ -1,4 +1,3 @@
-# app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
   # Webサイトのセキュリティ対策（必須です！）
   # これがないと、外部からの不正なデータ送信（CSRF攻撃）を防げません。
@@ -18,6 +17,8 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource)
     root_path
   end
+
+  private
 
   def configure_permitted_parameters
     # 新規登録（:sign_up）時に :name を受け取ることを許可
