@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # ★★★ ここからがDevise関連の重要な設定です ★★★
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   # ユーザーがログインまたは新規登録に成功した後に、どこに移動させるかを設定します。
   # ここでは、ログイン後に `/dashboard` のページに移動するように指示しています。
@@ -18,15 +19,12 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
-  # 必要に応じて、Deviseのstrong_parameters（フォームからのデータ受け取り）を設定する場所
-  # 例えば、ユーザー登録時にtime_zoneなどのカスタムカラムも入力させたい場合などに使う
-  # 今回はデフォルト値があるので必須ではないが、覚えておくと良い
-  # before_action :configure_permitted_parameters, if: :devise_controller?
-  #
-  # protected
-  #
-  # def configure_permitted_parameters
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:time_zone, :default_morning_time, :default_noon_time, :default_evening_time, :default_bedtime])
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:time_zone, :default_morning_time, :default_noon_time, :default_evening_time, :default_bedtime])
-  # end
+  def configure_permitted_parameters
+    # 新規登録（:sign_up）時に :name を受け取ることを許可
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+
+    # アカウント更新（:account_update）時に :name や他のカスタムカラムを受け取ることを許可
+    # （将来的な設定ページのために、time_zoneなども含めておきます）
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :time_zone, :default_morning_time, :default_noon_time, :default_evening_time, :default_bedtime])
+  end
 end
