@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index', as: 'user_dashboard'
 
   root 'home#index' # あなたのアプリの一番最初のページ（ランディングページ）
+  
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener" # この行を追加
+  end
 end
