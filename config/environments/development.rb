@@ -41,6 +41,16 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # 開発環境でのDeviseパスワードリセットメールの設定
+  # これにより、パスワードリセットメールが実際に送信され、
+  # letter_opener_web（ブラウザでメールを確認できるツール）で表示されるようになります。
+  config.action_mailer.perform_deliveries = true       # メールを実際に送信するかどうか
+  config.action_mailer.raise_delivery_errors = true    # メール送信エラーが発生した場合にエラーを発生させるかどうか
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 } # メール内のリンクのホストとポート
+  config.action_mailer.delivery_method = :letter_opener_web # メールをletter_opener_webで処理する
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

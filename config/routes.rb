@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: {
+    registrations: 'users/registrations' 
+  }
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # ★★★ この行を追加 ★★★
+  # "/dashboard" というURLにアクセスしたら、DashboardControllerのindexアクションを実行してね、という意味
+  # `as: 'user_dashboard'` は、このURLに `user_dashboard_path` という名前（呼び名）をつける設定
+  get 'dashboard', to: 'dashboard#index', as: 'user_dashboard'
+
+  root 'home#index' # あなたのアプリの一番最初のページ（ランディングページ）
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener" # この行を追加
+  end
 end
