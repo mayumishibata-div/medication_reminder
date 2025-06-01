@@ -18,6 +18,12 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  # ユーザーがアカウント情報を更新（編集）した後に、どこに移動させるかを設定します。
+  # ここでは編集後に`/dashboard` のページに移動するように指示しています。
+  def after_update_path_for(resource)
+    user_dashboard_path
+  end
+
   private
 
   def configure_permitted_parameters
