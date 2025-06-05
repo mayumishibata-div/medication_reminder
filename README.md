@@ -95,3 +95,6 @@
         * (Railsでの記述例: `User` モデルに `has_many :doses`)
     * **一つの服用記録 (`Dose`) は、必ず一人のユーザーによって記録されます。**
         * (Railsでの記述例: `Dose` モデルに `belongs_to :user`)
+
+パスワード再設定
+http://localhost:3000/letter_opener
